@@ -3,20 +3,247 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple Todo List</title>
+    <title>Elegant Todo List</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="container">
-      <h1>Todo List</h1>
-      <div class="todo-input">
-        <input type="text" id="todoInput" placeholder="할 일을 입력하세요" />
-        <button onclick="addTodo()">추가</button>
+    <div class="app-layout">
+      <!-- 좌측 패널 -->
+      <div class="left-panel">
+        <div class="profile-section">
+          <div class="profile-img">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <h3 class="welcome-text">안녕하세요!</h3>
+        </div>
+
+        <div class="mini-calendar">
+          <h3 class="panel-title">캘린더</h3>
+          <div class="calendar-container" id="miniCalendar">
+            <!-- 자바스크립트로 캘린더 생성 -->
+          </div>
+        </div>
+
+        <div class="categories">
+          <h3 class="panel-title">카테고리</h3>
+          <ul class="category-list">
+            <li class="category-item" data-category="work">
+              <span
+                class="category-color"
+                style="background-color: #3498db"
+              ></span>
+              <span class="category-name">업무</span>
+            </li>
+            <li class="category-item" data-category="personal">
+              <span
+                class="category-color"
+                style="background-color: #2ecc71"
+              ></span>
+              <span class="category-name">개인</span>
+            </li>
+            <li class="category-item" data-category="shopping">
+              <span
+                class="category-color"
+                style="background-color: #e74c3c"
+              ></span>
+              <span class="category-name">쇼핑</span>
+            </li>
+            <li class="category-item" data-category="health">
+              <span
+                class="category-color"
+                style="background-color: #9b59b6"
+              ></span>
+              <span class="category-name">건강</span>
+            </li>
+            <li class="category-item add-category">
+              <i class="fas fa-plus"></i>
+              <span>카테고리 추가</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="app-settings">
+          <h3 class="panel-title">설정</h3>
+          <div class="settings-option">
+            <span>다크 모드</span>
+            <label class="switch">
+              <input type="checkbox" id="darkModeToggle" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="settings-option">
+            <span>알림</span>
+            <label class="switch">
+              <input type="checkbox" id="notificationsToggle" checked />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
       </div>
-      <ul id="todoList">
-        <!-- Todo items will be added here -->
-      </ul>
+
+      <!-- 메인 컨테이너 -->
+      <div class="container main-container">
+        <!-- 날짜/시간 표시 -->
+        <div class="date-time-display">
+          <div class="date" id="currentDate">날짜 로딩중...</div>
+          <div class="time" id="currentTime">시간 로딩중...</div>
+        </div>
+
+        <header>
+          <h1>Todo List</h1>
+          <p class="subtitle">오늘의 할 일을 관리하세요</p>
+        </header>
+
+        <!-- 필터 탭 -->
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="all">전체</button>
+          <button class="tab-btn" data-filter="active">진행중</button>
+          <button class="tab-btn" data-filter="completed">완료</button>
+        </div>
+
+        <div class="todo-input-container">
+          <input type="text" id="todoInput" placeholder="할 일을 입력하세요" />
+          <button id="addBtn">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="todo-stats">
+          <p>총 <span id="total-tasks">0</span>개의 할 일이 있습니다</p>
+        </div>
+
+        <div class="todo-list-container">
+          <ul id="todoList">
+            <!-- Todo items will be added here -->
+          </ul>
+        </div>
+
+        <!-- 통계 영역 -->
+        <div class="stats-section">
+          <h3>나의 진행 상황</h3>
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-stats">
+              <div class="stat-item">
+                <span class="stat-number" id="completedCount">0</span>
+                <span class="stat-label">완료</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" id="activeCount">0</span>
+                <span class="stat-label">진행중</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 인용구 영역 -->
+        <div class="quote-section">
+          <blockquote id="randomQuote">
+            "오늘 할 일을 내일로 미루지 마세요."
+          </blockquote>
+        </div>
+
+        <!-- 푸터 -->
+        <footer class="footer">
+          <div class="footer-content">
+            <p>© 2025 My Todo List</p>
+            <p class="creator">
+              Created with <i class="fas fa-heart"></i> by hongdok_
+            </p>
+            <div class="footer-links">
+              <a
+                href="https://github.com/hongdok_"
+                target="_blank"
+                title="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+        </footer>
+      </div>
+
+      <!-- 우측 패널 -->
+      <div class="right-panel">
+        <div class="weather-widget">
+          <h3 class="panel-title">현재 날씨</h3>
+          <div class="weather-content">
+            <div class="weather-icon">
+              <i class="fas fa-sun"></i>
+            </div>
+            <div class="weather-info">
+              <div class="weather-temp">24°C</div>
+              <div class="weather-desc">맑음</div>
+              <div class="weather-location">서울</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="todo-details">
+          <h3 class="panel-title">할일 상세</h3>
+          <div class="details-placeholder" id="todoDetails">
+            <p class="empty-state">할일을 선택하면 상세 정보가 표시됩니다</p>
+          </div>
+        </div>
+
+        <div class="productivity-stats">
+          <h3 class="panel-title">생산성 통계</h3>
+          <div class="chart-container">
+            <h4>일주일 완료 현황</h4>
+            <div class="weekly-chart">
+              <div class="chart-bar">
+                <div class="bar-fill" style="height: 30%"></div>
+                <div class="bar-label">월</div>
+              </div>
+              <div class="chart-bar">
+                <div class="bar-fill" style="height: 60%"></div>
+                <div class="bar-label">화</div>
+              </div>
+              <div class="chart-bar">
+                <div class="bar-fill" style="height: 45%"></div>
+                <div class="bar-label">수</div>
+              </div>
+              <div class="chart-bar">
+                <div class="bar-fill" style="height: 75%"></div>
+                <div class="bar-label">목</div>
+              </div>
+              <div class="chart-bar">
+                <div class="bar-fill" style="height: 50%"></div>
+                <div class="bar-label">금</div>
+              </div>
+              <div class="chart-bar">
+                <div class="bar-fill" style="height: 25%"></div>
+                <div class="bar-label">토</div>
+              </div>
+              <div class="chart-bar">
+                <div class="bar-fill" style="height: 10%"></div>
+                <div class="bar-label">일</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- 수정 모달 -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>할 일 수정</h3>
+        <input type="text" id="editInput" />
+        <button id="saveEditBtn">저장</button>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
