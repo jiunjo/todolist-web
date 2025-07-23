@@ -3,20 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple Todo List</title>
+    <meta name="description" content="간단한 할 일 목록 웹 애플리케이션" />
+    <title>할 일 목록 | hongdok_</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
   <body>
+    <nav id="hongdok">hongdok_</nav>
+
     <div class="container">
-      <h1>Todo List</h1>
-      <div class="todo-input">
-        <input type="text" id="todoInput" placeholder="할 일을 입력하세요" />
-        <button onclick="addTodo()">추가</button>
+      <h1>할 일 목록</h1>
+
+      <div class="todo-input-container">
+        <input
+          type="text"
+          id="todoInput"
+          placeholder="새로운 할 일을 입력하세요"
+          autofocus
+        />
+        <button id="addBtn"><i class="fas fa-plus"></i> 추가</button>
       </div>
+
+      <div class="todo-stats">
+        <span id="todoCount">0개의 할 일</span>
+        <button id="clearCompletedBtn">완료된 항목 삭제</button>
+      </div>
+
       <ul id="todoList">
-        <!-- Todo items will be added here -->
+        <!-- 할 일 항목들이 여기에 동적으로 추가됩니다 -->
       </ul>
+
+      <div class="empty-state" id="emptyState">
+        <i class="fas fa-clipboard-list empty-icon"></i>
+        <p>할 일을 추가해보세요!</p>
+      </div>
     </div>
-    <script src="script.js"></script>
+
+    <footer>
+      <p>Made with ❤️ by hongdok_</p>
+    </footer>
+
+    <script src="todo.js"></script>
   </body>
 </html>

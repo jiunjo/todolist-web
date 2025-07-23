@@ -4,65 +4,292 @@
   box-sizing: border-box;
 }
 
+:root {
+  --main-font: "Poppins", "Noto Sans KR", sans-serif;
+  --code-font: "Poppins", consolas, "Courier New", monospace;
+  --primary-color: #4caf50;
+  --primary-dark: #45a049;
+  --primary-light: #a5d6a7;
+  --accent-color: #2196f3;
+  --delete-color: #f44336;
+  --text-light: rgba(255, 255, 255, 0.9);
+  --text-muted: rgba(255, 255, 255, 0.6);
+}
+
+#hongdok {
+  position: fixed;
+  inset: 8px auto auto 12px;
+  font-size: 18px;
+  color: #ffffffc9;
+  font-family: var(--code-font);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.678);
+  padding-bottom: 10px;
+  padding-top: 10px;
+  opacity: 0.7;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
+  color: var(--text-light);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  font-family: var(--main-font);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  align-items: center;
+  padding: 20px;
+  margin-top: 40px;
+  flex-direction: column;
+  line-height: 1.6;
 }
 
 .container {
   width: 100%;
-  max-width: 500px;
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
 }
 
 h1 {
   text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  font-weight: 600;
 }
 
-.todo-input {
+.todo-input-container {
   display: flex;
-  gap: 10px;
   margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-input {
+#todoInput {
   flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 15px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-family: var(--main-font);
   font-size: 16px;
+  transition: all 0.3s;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #4caf50;
+#todoInput:focus {
+  outline: none;
+  background-color: white;
+}
+
+#addBtn {
+  padding: 15px 25px;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--primary-dark)
+  );
   color: white;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  font-family: var(--main-font);
   font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-button:hover {
-  background-color: #45a049;
+#addBtn:hover {
+  background: linear-gradient(to right, var(--primary-dark), #388e3c);
+  transform: translateX(2px);
+}
+
+.todo-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: var(--text-light);
+  font-size: 14px;
+  font-weight: 300;
+}
+
+#clearCompletedBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--main-font);
+  font-size: 14px;
+  transition: all 0.2s;
+  text-decoration: underline;
+}
+
+#clearCompletedBtn:hover {
+  color: white;
 }
 
 #todoList {
   list-style: none;
+  margin-bottom: 20px;
 }
 
-#todoList li {
-  padding: 10px;
-  background: #f9f9f9;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  border-left: 4px solid #4caf50;
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 18px 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: all 0.3s;
+  border-left: 4px solid var(--primary-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.todo-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+}
+
+.todo-text {
+  flex: 1;
+  word-break: break-word;
+  font-size: 17px;
+  padding-right: 15px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.todo-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--main-font);
+  font-weight: 500;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.delete-btn {
+  background: linear-gradient(to right, var(--delete-color), #d32f2f);
+  color: white;
+}
+
+.delete-btn:hover {
+  background: linear-gradient(to right, #d32f2f, #b71c1c);
+  transform: scale(1.05);
+}
+
+.complete-btn {
+  background: linear-gradient(to right, var(--accent-color), #0b7dda);
+  color: white;
+}
+
+.complete-btn:hover {
+  background: linear-gradient(to right, #0b7dda, #0a67b3);
+  transform: scale(1.05);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.empty-icon {
+  font-size: 50px;
+  opacity: 0.7;
+}
+
+.empty-state p {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+footer {
+  margin-top: 30px;
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* 애니메이션 효과 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.todo-item {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .todo-actions {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  #todoInput,
+  #addBtn {
+    padding: 12px;
+  }
+
+  .todo-stats {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
 }
